@@ -9,4 +9,5 @@ export default function ShopLoading() {
       </div>
     </div>
   );
+
 }
