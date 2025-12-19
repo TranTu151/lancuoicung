@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Shop — Shoply" };
 
 export default async function ShopLayout({ children }: { children: React.ReactNode }) {
   // Breadcrumb đơn giản dựa vào pathname (chỉ để demo; bài sau sẽ có router tốt hơn)
-  const pathname = (await headers()).get("x-pathname") || "/shop"; // fallback
+  const pathname = headers().get("x-pathname") || "/shop"; // ✅ bỏ await
   const isDetail = pathname.startsWith("/shop/") && pathname.split("/").length > 2;
 
   return (
