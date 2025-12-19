@@ -9,10 +9,8 @@ import SiteFooter from "@/components/SiteFooter";
 import { getProductBySlug } from "@/lib/catalog";
 import AddToCartButton from "@/features/cart/AddToCartButton";
 
-// Ép kiểu cho PRODUCTS để TypeScript biết rõ ràng
 const ProductList = PRODUCTS as Product[];
 
-// ✅ generateMetadata không dùng await cho params
 export async function generateMetadata(
   { params }: { params: { slug: string } }
 ): Promise<Metadata> {
@@ -27,12 +25,10 @@ function getRandomProducts(currentSlug: string, count: number) {
   const filteredProducts = ProductList.filter(
     (p) => p.slug !== currentSlug && (p.stock ?? 0) > 0
   );
-
   const shuffled = filteredProducts.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 }
 
-// ✅ Page component cũng không dùng await cho params
 export default async function ProductDetailPage(
   { params }: { params: { slug: string } }
 ) {
@@ -43,7 +39,7 @@ export default async function ProductDetailPage(
     notFound();
   }
 
-  const imageSrc: string =
+  const imageSrc =
     Array.isArray(product.images) && product.images.length > 0
       ? product.images[0]
       : "/ham.png";
@@ -93,7 +89,7 @@ export default async function ProductDetailPage(
             </p>
           )}
 
-          <div className="mt-6 flex gap-3 ">
+          <div className="mt-6 flex gap-3">
             <AddToCartButton
               product={product}
               disabled={product.stock <= 0}
@@ -120,7 +116,7 @@ export default async function ProductDetailPage(
           <h3 className="text-2xl font-semibold mb-6">Có thể bạn quan tâm</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {relatedProducts.map((p) => {
-              const relatedImageSrc: string =
+              const relatedImageSrc =
                 Array.isArray(p.images) && p.images.length > 0
                   ? p.images[0]
                   : "/ham.png";
@@ -147,7 +143,6 @@ export default async function ProductDetailPage(
                         Deal
                       </span>
                     )}
-
                     <div className="p-4">
                       <h4 className="font-semibold text-lg truncate">
                         {p.title}
